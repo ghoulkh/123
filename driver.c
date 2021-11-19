@@ -148,7 +148,7 @@ static ssize_t etx_write(struct file *filp,
                 const char __user *buf, size_t len, loff_t *off)
 {
   uint8_t rec_buf[10] = {0};
-  
+  int i=0;
   if( copy_from_user( rec_buf, buf, len ) > 0) {
     pr_err("ERROR: Not all the bytes have been copied from user\n");
   }
@@ -156,13 +156,16 @@ static ssize_t etx_write(struct file *filp,
   pr_info("Write Function : GPIO_21 Set = %c\n", rec_buf[0]);
   
   if (rec_buf[0]=='1') {
-  while (rec_buf[0]=='1') {
+  do {
     //set the GPIO value to HIGH and LOW
       gpio_set_value(GPIO_21_OUT, 1);
+      printk("Starting timer, current time (%ld)\n", jiffies);	
       msleep(1000);
       gpio_set_value(GPIO_21_OUT, 0);
+      printk("Oni callback function (%ld).\n", jiffies); 
       msleep(1000);
-  }
+      i++;
+  }while(i==30);
   }else {
     pr_err("Unknown command : Please provide either 1 or 0 \n");
   }
