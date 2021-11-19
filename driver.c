@@ -160,10 +160,10 @@ static ssize_t etx_write(struct file *filp,
     //set the GPIO value to HIGH
       gpio_set_value(GPIO_21_OUT, 1);
       msleep(1000);
+      gpio_set_value(GPIO_21_OUT, 0);
+      msleep(1000);
     } while (rec_buf[0]=='0');
-  } else if (rec_buf[0]=='0') {
-    //set the GPIO value to LOW
-    gpio_set_value(GPIO_21_OUT, 0);
+      gpio_set_value(GPIO_21_OUT, 0);
   } else {
     pr_err("Unknown command : Please provide either 1 or 0 \n");
   }
