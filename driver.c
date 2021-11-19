@@ -156,15 +156,14 @@ static ssize_t etx_write(struct file *filp,
   pr_info("Write Function : GPIO_21 Set = %c\n", rec_buf[0]);
   
   if (rec_buf[0]=='1') {
-    do{
-    //set the GPIO value to HIGH
+  while (rec_buf[0]=='1') {
+    //set the GPIO value to HIGH and LOW
       gpio_set_value(GPIO_21_OUT, 1);
       msleep(1000);
       gpio_set_value(GPIO_21_OUT, 0);
       msleep(1000);
-    } while (rec_buf[0]=='0');
-      gpio_set_value(GPIO_21_OUT, 0);
-  } else {
+  }
+  }else {
     pr_err("Unknown command : Please provide either 1 or 0 \n");
   }
   
