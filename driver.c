@@ -248,7 +248,7 @@ static ssize_t etx_write(struct file *filp,
       msleep(1000);
     }
   }
-  }else {
+  else {
     pr_err("Unknown command : Please provide either 1 or 0 \n");
   }
   
