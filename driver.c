@@ -159,7 +159,9 @@ static ssize_t etx_write(struct file *filp,
       gpio_set_value(GPIO_21_OUT, 1);
       printk("Starting timer, current time (%ld)\n", jiffies);	
       msleep(1000);
+      gpio_set_value(GPIO_21_OUT, 0);
       printk("Oni callback function (%ld).\n", jiffies); 
+      msleep(1000);
     }
   }
   else {
