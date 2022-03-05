@@ -105,7 +105,8 @@ def detect_video_realtime_mp(video_path, output_path, input_size=416, show=False
         Frames_data.put(image_data)
         
     while True:
-        if original_frames.qsize() == 0 and Frames_data.qsize() == 0 and Predicted_data.qsize() == 0  and Processed_frames.qsize() == 0  and Processing_times.qsize() == 0 and Final_frames.qsize() == 0:
+        if original_frames.qsize() == 0 and Frames_data.qsize() == 0 and Predicted_data.qsize() == 0  
+        and Processed_frames.qsize() == 0  and Processing_times.qsize() == 0 and Final_frames.qsize() == 0:
             p1.terminate()
             p2.terminate()
             p3.terminate()
