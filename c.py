@@ -61,7 +61,8 @@ def Show_Image_mp(Processed_frames, show, Final_frames):
                     cv2.destroyAllWindows()
                     break
 
-def detect_video_realtime_mp(video_path, output_path, input_size=416, show=False, CLASSES=YOLO_COCO_CLASSES, score_threshold=0.3, iou_threshold=0.45, rectangle_colors='', realtime=False):
+def detect_video_realtime_mp(video_path, output_path, input_size=416, show=False, CLASSES=YOLO_COCO_CLASSES, score_threshold=0.3, iou_threshold=0.45,
+                             rectangle_colors='', realtime=False):
     if realtime:
         vid = cv2.VideoCapture(0)
     else:
@@ -83,7 +84,8 @@ def detect_video_realtime_mp(video_path, output_path, input_size=416, show=False
     Final_frames = Queue()
     
     p1 = Process(target=Predict_bbox_mp, args=(Frames_data, Predicted_data, Processing_times))
-    p2 = Process(target=postprocess_mp, args=(Predicted_data, original_frames, Processed_frames, Processing_times, input_size, CLASSES, score_threshold, iou_threshold, rectangle_colors, realtime))
+    p2 = Process(target=postprocess_mp, args=(Predicted_data, original_frames, Processed_frames, Processing_times, 
+                                              input_size, CLASSES, score_threshold, iou_threshold, rectangle_colors, realtime))
     p3 = Process(target=Show_Image_mp, args=(Processed_frames, show, Final_frames))
     p1.start()
     p2.start()
